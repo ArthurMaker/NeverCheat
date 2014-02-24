@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.mindlin.legitPlugin.Data.PlayerData;
+import com.mindlin.legitPlugin.Listeners.BlockChange;
 import com.mindlin.legitPlugin.Listeners.PlayerLogin;
 
 public class Main extends JavaPlugin{
@@ -15,6 +16,7 @@ public class Main extends JavaPlugin{
 		PlayerData.load();
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new PlayerLogin(), this);
+		pm.registerEvents(new BlockChange(), this);
 	}
 	@Override
 	public void onDisable(){
