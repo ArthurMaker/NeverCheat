@@ -13,5 +13,7 @@ public class PlayerLogin implements Listener{
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent e){
 		PlayerData.registerLogin(e.getPlayer());
+		e.getPlayer().sendMessage("Hi");
+		PlayerData.main.getLogger().info("Hi, " + e.getPlayer().getDisplayName());
 	}
 }

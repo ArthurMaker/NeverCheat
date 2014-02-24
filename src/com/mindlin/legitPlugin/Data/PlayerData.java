@@ -31,12 +31,19 @@ public class PlayerData implements Serializable{
 			data.put(p.getName(), new PlayerData(p));
 		}
 	}
+	public static PlayerData get(Player p){
+		return get(p.getName());
+	}
+	public static PlayerData get(String s){
+		return data.get(s);
+	}
 	public static void flush(){
 		data.clear();
 	}
 	public static void save(){
 		String path=main.getDataFolder() + File.separator + "players.bin";
 		File f=new File(path);
+		main.getDataFolder().mkdirs();
 		try {
 			f.createNewFile();
 			ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(f));
@@ -83,21 +90,20 @@ public class PlayerData implements Serializable{
 	//instance stuff
 	public PermissionAttachment pa;
 	public PlayerData(){}
-	public OfflinePlayer op;
 	public List<String> perms=new LinkedList<String>();
+	public String name;
+	public boolean xray=false;
 	public PlayerData(Player p){
-		op=p.getPlayer();
+		name=p.getName();
 	}
 	public void givePermission(String p){
 		if(p!="OP"){
 			perms.add(p);
-		}else{
-			op.setOp(true);
 		}
 	}
 	public void update(){
 		ListIterator<String> li=perms.listIterator();
-		Player p=(Player) (op.isOnline()?Bukkit.getPlayer(op.getName()):op);
+		Player p=Bukkit.getPlayer(name);
 		pa.remove();
 		pa=p.addAttachment(main);
 		while(li.hasNext()){
@@ -106,6 +112,5 @@ public class PlayerData implements Serializable{
 	}
 	public void revokePermission(String p){
 		if(p!="OP")perms.remove(p);
-		op.setOp(false);
 	}
 }
