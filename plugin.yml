@@ -1,0 +1,11 @@
+name: AntiCheat-Beta
+main: com.mindlin.legitPlugin.Main
+version: 1
+commands:
+    ac:
+        description: AntiCheat Commands
+    ac internal:
+        description: AntiCheat Internal commands
+    ac admin:
+        description: AntiCheat Admin commands
+        permission: AntiCheat.admin
